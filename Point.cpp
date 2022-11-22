@@ -8,13 +8,15 @@ class Point{
 		int x=1;
 		int y=1;
 	public:
-		Point(){cout<<"Konstrukcja"<<endl;}
+		Point(){cout<<"Konstrukcja domyslna"<<endl;}
+//Konstruktor kopiujacy tworzy kopie do obiketu
 		Point(Point& p)
 		{
 			cout<<"Kopia"<<endl;
 			this->x=p.x;
 			this->y=p.y;
 		}
+//Konstruktor przenoszacy obiekt z ktorego przenosimy czyscimy
 		Point(Point&& p)
 		{
 			cout<<"Przeniesienie"<<endl;
@@ -24,11 +26,18 @@ class Point{
 			p.y=0;
 
 		}
+//Konstuktor z parametrami
 		Point(int x, int y=0)
 		{
+			cout<<"Konstrukcja z parametrem";
 			this->x=x;
 			this->y=y;
 		};
+//Destruktor
+		~Point()
+		{
+			cout<<"Desktruckja"<<endl;
+		}
 		void Translate (int dX, int dY)
 		{
 			x+=dX;
@@ -42,20 +51,24 @@ class Point{
 
 
 };
-
+//Przekazanie przez referencje konstuktor tylko konstruktor jakby przekazac Point p to bylaby konstrukcja i kopia
 void test(Point& p)
 {
 	p.print();
 	p.Translate(5,5) ;
 	p.print();
 }
-Point testPrzenoszenie(int n)
+Point testMove(int n)
 {
-	if(m>0)
+	Point p;
+	if(n>0)
 	{
 		return Point(1);
 	}
-	return p;
+	else 
+	{
+		return p;
+	}
 }
 
 int main()
@@ -64,10 +77,18 @@ int main()
 //	point.print();
 //	point.Translate(4,5);
 //	point.print();
-//	Point p;
-	Point p1;
-	Point p = testPrzenoszenie();
-//	test(p);
+	Point zwykly;
+	Point kopiujacy = zwykly;
+	Point przenoszacy=testMove(-1);
+
+
+	cout<<"----------------------------"<<endl;
+	test(kopiujacy);
+//	testPrzenoszenie(przenoszacy);
 //	Point p2 = p;
-	return 0;
+	for (int i=1;i<6;i++)
+	{
+		Point p(i,i);
+		p.print();
+	}
 }
